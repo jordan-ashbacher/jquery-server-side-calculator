@@ -26,8 +26,22 @@ function calculate() {
     equation.numTwo = $('#numberTwoIn').val()
     console.log(equation)
 
-    
+    $.ajax({
+        url: '/calculate',
+        type: 'POST',
+        data: equation
+    }).then(function (response) {
+        console.log(response)
+        $('#numberOneIn').val('')
+        $('#numberTwoIn').val('')
+    })
 }
+
+
+
+
+
+
 
 function addOperator() {
     equation.operator = '+'
