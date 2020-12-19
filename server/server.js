@@ -24,6 +24,7 @@ function calculate(equation) {
     } else {
         currentAnswer = numOne / numTwo
     }
+    console.log(currentAnswer)
     equation.answer = currentAnswer
     history.push(equation)
 }

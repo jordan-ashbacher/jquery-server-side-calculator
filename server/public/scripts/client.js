@@ -14,20 +14,33 @@ function handleReady() {
     $('#evaluate').on('click', calculate)
     $('#clear-button').on('click', clear)
 
+    $('.number-key').on('click', getNumber)
+    // $('.operator-key').on('click', getOperator)
+
 }
 
 let equation = {}
 
+function getNumber(e) {
+    let numOne
+    console.log('in getNumber')
+    button = e.target
+    value = button.textContent
+    console.log(value)
+    // let displayContent = $('#display').text()
+    $('#calc-display').val(function(n, c) {
+        return c + value
+    })
+      
+}
 
 function clear() {
-    $('#numberOneIn').val('')
-    $('#numberTwoIn').val('')
+    $('#calc-display').val('')
 }
 
 function calculate() {
     console.log('in calculate')
-    equation.numOne = $('#numberOneIn').val()
-    equation.numTwo = $('#numberTwoIn').val()
+    equation.numTwo = $('#calc-display').val()
     console.log(equation)
 
     $.ajax({
@@ -65,18 +78,34 @@ function renderDOM() {
 
 function addOperator() {
     equation.operator = '+'
+
+    equation.numOne = $('#calc-display').val()
+
+    $('#calc-display').val('')
 }
 
 function subtractOperator() {
     equation.operator = "-"
+
+    equation.numOne = $('#calc-display').val()
+
+    $('#calc-display').val('')
 }
 
 function multiplyOperator() {
     equation.operator = "*"
+
+    equation.numOne = $('#calc-display').val()
+
+    $('#calc-display').val('')
 }
 
 function divideOperator() {
     equation.operator = "/"
+
+    equation.numOne = $('#calc-display').val()
+
+    $('#calc-display').val('')
 }
 
 
