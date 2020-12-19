@@ -13,7 +13,6 @@ function handleReady() {
 
     $('#evaluate').on('click', calculate)
     // $('#clear-button').on('click', clearHistory)
-    // renderToDom()
 
 }
 
@@ -34,11 +33,29 @@ function calculate() {
         console.log(response)
         $('#numberOneIn').val('')
         $('#numberTwoIn').val('')
+        renderDOM()
     })
 }
 
 
+function renderDOM() {
+    $.ajax({
+        url: '/calculate',
+        type: 'GET'
+    }).then(function(response) {
+        console.log(response)
+        let lastAnswer = response[response.length-1].answer
+        console.log('Last answer is:', lastAnswer)
+        $('#results').empty()
 
+        $('#results').append(`<h1 id="current-answer">${lastAnswer}</h1>`)
+        $('#calc-history').empty()
+        for (let equation of response) {
+            console.log('This is the', equation)
+            $('#calc-history').append(`<li>${equation.numOne} ${equation.operator} ${equation.numTwo} = ${equation.answer}</li>`)
+        }
+    })
+}
 
 
 

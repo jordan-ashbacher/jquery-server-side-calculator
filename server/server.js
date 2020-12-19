@@ -31,6 +31,7 @@ function calculate(equation) {
 
 
 app.post('/calculate', (req, res) => {
+    console.log('in POST /calculate')
     let equation = req.body
     console.log(equation)
     calculate(equation)
@@ -38,7 +39,10 @@ app.post('/calculate', (req, res) => {
     res.sendStatus(201)
 })
 
-
+app.get('/calculate', (req, res) => {
+    console.log('in GET /calculate')
+    res.send(history)
+})
 
 app.listen(PORT, () => {
     console.log('server is running on port', PORT)
