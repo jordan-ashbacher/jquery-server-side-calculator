@@ -12,12 +12,17 @@ function handleReady() {
     $('#divide-button').on('click', divideOperator)
 
     $('#evaluate').on('click', calculate)
-    // $('#clear-button').on('click', clearHistory)
+    $('#clear-button').on('click', clear)
 
 }
 
 let equation = {}
 
+
+function clear() {
+    $('#numberOneIn').val('')
+    $('#numberTwoIn').val('')
+}
 
 function calculate() {
     console.log('in calculate')
@@ -31,8 +36,6 @@ function calculate() {
         data: equation
     }).then(function (response) {
         console.log(response)
-        $('#numberOneIn').val('')
-        $('#numberTwoIn').val('')
         renderDOM()
     })
 }
