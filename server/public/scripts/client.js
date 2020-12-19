@@ -15,6 +15,7 @@ function handleReady() {
     $('#clear-button').on('click', clear)
 
     $('.number-key').on('click', getNumber)
+    $('#clear-history').on('click', clearHistory)
     // $('.operator-key').on('click', getOperator)
 
 }
@@ -53,7 +54,6 @@ function calculate() {
     })
 }
 
-
 function renderDOM() {
     $.ajax({
         url: '/calculate',
@@ -62,6 +62,7 @@ function renderDOM() {
         console.log(response)
         let lastAnswer = response[response.length-1].answer
         console.log('Last answer is:', lastAnswer)
+        $('#calc-display').val(lastAnswer)
         $('#results').empty()
 
         $('#results').append(`<h1 id="current-answer">${lastAnswer}</h1>`)
@@ -72,9 +73,6 @@ function renderDOM() {
         }
     })
 }
-
-
-
 
 function addOperator() {
     equation.operator = '+'
@@ -106,6 +104,19 @@ function divideOperator() {
     equation.numOne = $('#calc-display').val()
 
     $('#calc-display').val('')
+}
+
+function clearHistory() {
+    console.log('in clear history')
+    $.ajax({
+        url: '/history',
+        type: 'DELETE'
+    }).then(function (response) {
+        console.log(response)
+        $('#results').empty()
+        $('#calc-history').empty()
+        $('#calc-display').val('')
+    })
 }
 
 

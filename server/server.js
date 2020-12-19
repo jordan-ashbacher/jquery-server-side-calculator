@@ -45,6 +45,12 @@ app.get('/calculate', (req, res) => {
     res.send(history)
 })
 
+app.delete('/history', (req, res) => {
+    console.log('in DELETE /history')
+    history = []
+    res.send(history)
+})
+
 app.listen(PORT, () => {
     console.log('server is running on port', PORT)
 })
